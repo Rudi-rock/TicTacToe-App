@@ -15,9 +15,10 @@ public class TicTacToe {
 
     public static void main(String[] args) {
         /**
-         * Entry point of the program. Tests the win-check logic.
+         * Entry point of the program. Tests draw detection logic.
          */
-        System.out.println(hasWon('X'));
+        initializeBoard();
+        System.out.println(isDraw());
     }
 
     static int getUserSlot() {
@@ -57,6 +58,21 @@ public class TicTacToe {
         }
 
         return false;
+    }
+
+    /**
+     * Traverses the board to check for any remaining empty cells.
+     * Output: true if draw, false otherwise.
+     */
+    static boolean isDraw() {
+        for (int r = 0; r < 3; r++) {
+            for (int c = 0; c < 3; c++) {
+                if (board[r][c] == '-') {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     /**
