@@ -14,43 +14,49 @@ public class TicTacToe {
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        initializeBoard();
-        tossAndAssignSymbols();
-        displayTossResult();
-
         /**
-         * Entry point of the program. Demonstrates the structure
-         * of a continuous game loop.
+         * Entry point of the program. Tests the win-check logic.
          */
-        while (!gameOver) {
-            printBoard();
-            if (isHumanTurn) {
-                int slot = getUserSlot();
-                int row = getRowFromSlot(slot);
-                int col = getColFromSlot(slot);
-                if (isValidMove(row, col)) {
-                    placeMove(row, col, humanSymbol);
-                    isHumanTurn = false;
-                }
-            } else {
-                computerMove();
-                isHumanTurn = true;
-            }
-            // Win/draw detection to be added in UC9-10
-            // For now, game continues
-        }
+        System.out.println(hasWon('X'));
     }
 
-    /**
-     * Reads an integer slot value from the user.
-     * Input: Scanner object
-     * Output: Slot number (1-9)
-     * Hint: Validation will be added in later use cases.
-     */
     static int getUserSlot() {
         System.out.print("Enter slot number (1-9): ");
         int slot = scanner.nextInt();
         return slot;
+    }
+
+    /**
+     * Checks all possible winning patterns for the given symbol.
+     * Input: Player symbol
+     * Output: true if win detected.
+     */
+    static boolean hasWon(char symbol) {
+        // Check all rows
+        for (int row = 0; row < 3; row++) {
+            if (board[row][0] == symbol && board[row][1] == symbol && board[row][2] == symbol) {
+                return true;
+            }
+        }
+
+        // Check all columns
+        for (int col = 0; col < 3; col++) {
+            if (board[0][col] == symbol && board[1][col] == symbol && board[2][col] == symbol) {
+                return true;
+            }
+        }
+
+        // Check top-left to bottom-right diagonal
+        if (board[0][0] == symbol && board[1][1] == symbol && board[2][2] == symbol) {
+            return true;
+        }
+
+        // Check top-right to bottom-left diagonal
+        if (board[0][2] == symbol && board[1][1] == symbol && board[2][0] == symbol) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
