@@ -13,9 +13,8 @@ public class TicTacToe {
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        int slot = 7;
-        System.out.println("Row: " + getRowFromSlot(slot));
-        System.out.println("Column: " + getColFromSlot(slot));
+        initializeBoard();
+        System.out.println(isValidMove(1, 1));
     }
 
     /**
@@ -46,6 +45,22 @@ public class TicTacToe {
      */
     static int getColFromSlot(int slot) {
         return (slot - 1) % 3;
+    }
+
+    /**
+     * Checks if the given row and column are within bounds
+     * and if the target cell is empty.
+     * Input: Row, Column
+     * Output: true if valid, false otherwise.
+     */
+    static boolean isValidMove(int row, int col) {
+        if (row < 0 || row > 2 || col < 0 || col > 2) {
+            return false;
+        }
+        if (board[row][col] != '-') {
+            return false;
+        }
+        return true;
     }
 
     static void tossAndAssignSymbols() {
