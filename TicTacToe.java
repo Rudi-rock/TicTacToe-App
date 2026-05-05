@@ -1,3 +1,4 @@
+import java.util.Scanner;
 import java.util.Random;
 
 public class TicTacToe {
@@ -9,12 +10,23 @@ public class TicTacToe {
     static String currentPlayer;
 
     static Random random = new Random();
+    static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        tossAndAssignSymbols();
-        displayTossResult();
-        initializeBoard();
-        printBoard();
+        int slot = getUserSlot();
+        System.out.println("Slot entered: " + slot);
+    }
+
+    /**
+     * Reads an integer slot value from the user.
+     * Input: Scanner object
+     * Output: Slot number (1-9)
+     * Hint: Validation will be added in later use cases.
+     */
+    static int getUserSlot() {
+        System.out.print("Enter slot number (1-9): ");
+        int slot = scanner.nextInt();
+        return slot;
     }
 
     static void tossAndAssignSymbols() {
