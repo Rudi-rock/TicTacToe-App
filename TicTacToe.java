@@ -14,7 +14,8 @@ public class TicTacToe {
 
     public static void main(String[] args) {
         initializeBoard();
-        System.out.println(isValidMove(1, 1));
+        placeMove(0, 0, 'X');
+        System.out.println(board[0][0]);
     }
 
     /**
@@ -61,6 +62,16 @@ public class TicTacToe {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Updates the board by placing the given symbol at
+     * the specified row and column.
+     * Input: Row, Column, Symbol
+     * Hint: Assume the move is already validated.
+     */
+    static void placeMove(int row, int col, char symbol) {
+        board[row][col] = symbol;
     }
 
     static void tossAndAssignSymbols() {
