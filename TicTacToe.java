@@ -4,7 +4,8 @@ import java.util.Random;
 public class TicTacToe {
 
     static char[][] board = new char[3][3];
-    static boolean isHumanTurn;
+    static boolean isHumanTurn = true;
+    static boolean gameOver = false;
     static char humanSymbol;
     static char computerSymbol;
     static String currentPlayer;
@@ -14,8 +15,30 @@ public class TicTacToe {
 
     public static void main(String[] args) {
         initializeBoard();
-        computerSymbol = 'O';
-        computerMove();
+        tossAndAssignSymbols();
+        displayTossResult();
+
+        /**
+         * Entry point of the program. Demonstrates the structure
+         * of a continuous game loop.
+         */
+        while (!gameOver) {
+            printBoard();
+            if (isHumanTurn) {
+                int slot = getUserSlot();
+                int row = getRowFromSlot(slot);
+                int col = getColFromSlot(slot);
+                if (isValidMove(row, col)) {
+                    placeMove(row, col, humanSymbol);
+                    isHumanTurn = false;
+                }
+            } else {
+                computerMove();
+                isHumanTurn = true;
+            }
+            // Win/draw detection to be added in UC9-10
+            // For now, game continues
+        }
     }
 
     /**
