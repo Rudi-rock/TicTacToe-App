@@ -14,8 +14,8 @@ public class TicTacToe {
 
     public static void main(String[] args) {
         initializeBoard();
-        placeMove(0, 0, 'X');
-        System.out.println(board[0][0]);
+        computerSymbol = 'O';
+        computerMove();
     }
 
     /**
@@ -72,6 +72,26 @@ public class TicTacToe {
      */
     static void placeMove(int row, int col, char symbol) {
         board[row][col] = symbol;
+    }
+
+    /**
+     * Generates random slot values until a valid move is found,
+     * then places the computer symbol on the board.
+     */
+    static void computerMove() {
+        int slot;
+        int row;
+        int col;
+
+        while (true) {
+            slot = random.nextInt(9) + 1;
+            row = getRowFromSlot(slot);
+            col = getColFromSlot(slot);
+            if (isValidMove(row, col)) {
+                placeMove(row, col, computerSymbol);
+                break;
+            }
+        }
     }
 
     static void tossAndAssignSymbols() {
